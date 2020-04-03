@@ -1,0 +1,27 @@
+{
+ 
+    "datos": [
+      {"region": "Andalucía", "numero_casos":	1961},
+      {"region": "Aragón" , "numero_casos": 638},
+      {"region": "Principado de Asturias", "numero_casos":	594},
+      {"region": "Islas Baleares", "numero_casos":	400},
+      {"region": "Canarias", "numero_casos":	481},
+      {"region": "Cantabria", "numero_casos":	347},
+      {"region": "Castilla y León", "numero_casos":	2055},
+      {"region": "Castilla La Mancha", "numero_casos":	2078},
+      {"region": "Cataluña", "numero_casos":	5925},
+      {"region": "Galicia", "numero_casos":	1208},
+      {"region": "C. Valenciana", "numero_casos":	1901},
+      {"region": "Extremadura", "numero_casos":	493},
+      {"region": "Comunidad de Madrid", "numero_casos":	10575},
+      {"region": "Región de Murcia", "numero_casos":	345},
+      {"region": "Comunidad Foral de Navarra", "numero_casos":	886},
+      {"region": "País Vasco", "numero_casos":	2421},
+      {"region": "La Rioja", "numero_casos":	747},
+      {"region": "Ceuta", "numero_casos":	6},
+      {"region": "Melilla", "numero_casos":	28}
+        
+    ]
+}
+
+

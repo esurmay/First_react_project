@@ -1,0 +1,81 @@
+{
+    "datos":  [
+        {
+            "Descripcion": "Andalucía",
+            "CCAA": "AN"
+        },
+        {
+            "Descripcion": "Aragón",
+            "CCAA": "AR"
+        },
+        {
+            "Descripcion": "Principado de Asturias",
+            "CCAA": "AS"
+        },
+        {
+            "Descripcion": "Islas Baleares",
+            "CCAA": "IB"
+        },
+        {
+            "Descripcion": "Canarias",
+            "CCAA": "CN"
+        },
+        {
+            "Descripcion": "Cantabria",
+            "CCAA": "CB"
+        },
+        {
+            "Descripcion": "Castilla y León",
+            "CCAA": "CL"
+        },
+        {
+            "Descripcion": "Castilla La Mancha",
+            "CCAA": "CM"
+        },
+        {
+            "Descripcion": "Cataluña",
+            "CCAA": "CT"
+        },
+        {
+            "Descripcion": "Galicia",
+            "CCAA": "GA"
+        },
+        {
+            "Descripcion": "C. Valenciana",
+            "CCAA": "VC"
+        },
+        {
+            "Descripcion": "Extremadura",
+            "CCAA": "EX"
+        },
+        {
+            "Descripcion": "Comunidad de Madrid",
+            "CCAA": "MD"
+        },
+        {
+            "Descripcion": "Región de Murcia",
+            "CCAA": "MC"
+        },
+        {
+            "Descripcion": "Comunidad Foral de Navarra",
+            "CCAA": "NC"
+        },
+        {
+            "Descripcion": "País Vasco",
+            "CCAA": "PV"
+        },
+        {
+            "Descripcion": "La Rioja",
+            "CCAA": "RI"
+        },
+        {
+            "Descripcion": "Ceuta",
+            "CCAA": "CE"
+        },
+        {
+            "Descripcion": "Melilla",
+            "CCAA": "ME"
+        }
+    ]
+
+}
