@@ -37,6 +37,7 @@ tr:hover {
   overflow: hidden;
   border: 1px solid black;
   box-shadow: 5px 5px 10px 3px gray;
+  width: 100%;
 }
  th, td {
   padding: 0.5em;
@@ -64,32 +65,61 @@ tr:hover {
 }
 
 /* On screens that are 992px wide or less, the background color is blue */
-@media screen and (max-width: 992px) {
+@media screen and (max-width:1024px) {
   .fechaTabla{
     color: #1759FF;
      vertical-align: bottom;
-     font-size:20px;
+     /* font-size:20px; */
   }
 
     .header-left {
-      width:26%;
+      width:27%;
       float:left;
     
   }
 }
 
 /* On screens that are 600px wide or less, the background color is olive */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
+  .fechaTabla{
+    color: #1759FF;
+     vertical-align: bottom;
+     font-size:20px;
+  }
+  .header-left {
+    width:22%;
+    float:left;
+    
+  }
+}
+
+@media screen and (max-width: 375px) {
   .fechaTabla{
     color: #1759FF;
      vertical-align: bottom;
      font-size:25px;
   }
   .header-left {
-    width:33%;
+    width:31%;
     float:left;
-  
-}
+    
+  }
 }
 
- 
+@media screen and (max-width: 320px) {
+  .fechaTabla{
+    color: #1759FF;
+     vertical-align: bottom;
+     font-size:25px;
+  }
+  .header-left {
+    width:25%;
+    float:left;
+    
+  }
+}
+
+
+ .tdRowSpan{
+  vertical-align: middle; text-align:center
+ }

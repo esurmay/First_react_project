@@ -16,6 +16,9 @@ class genericsFunctions extends Component {
             day = '' + d.getDate(),
             year = d.getFullYear();
 
+  
+
+
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
@@ -40,6 +43,7 @@ class genericsFunctions extends Component {
         }
 
         fecha = (fecha) ? this.formatDate(fecha) : this.formatDate(new Date());
+              
         let params = `q={"Fechas":{"$eq":{"$date":"${fecha}"}}}`;
         let urlBase = 'https://covid19spain-ad3b.restdb.io/rest/coronavirus-spain?';
         let url = urlBase + params;
