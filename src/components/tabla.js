@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/tabla.css'
 import genericsFunctions from '../Services/retrieveData';
-import Moment from 'moment'
+
 
 class tablaDatos extends Component {
 
@@ -42,7 +42,7 @@ class tablaDatos extends Component {
     this.totalCasos = 0;
     result.then(data =>
       this.setState({ data: data, isLoading: false })
-      
+
     )
 
     return result;
@@ -51,13 +51,13 @@ class tablaDatos extends Component {
 
   renderTableData() {
 
-     
+
 
     if (this.state.data.length > 0) {
       return (this.state.data || []).map((x, index) => {
         let indexRow = "row" + index;
         this.totalCasos += parseInt(x.numero_casos);
-      
+
         return (
           <tr className={indexRow} key={index.toString()} >
             <td>{x.region}</td>
@@ -70,11 +70,17 @@ class tablaDatos extends Component {
 
       if (this.state.isLoading) {
         return (
-          <td colSpan="2" className="tdRowSpan">
-
-            <img src="https://i.gifer.com/origin/8b/8b4d5872105584fe9e2d445bea526eb5_w200.gif"
-              className="img-rounded" alt="Cinque Terre" ></img>
-          </td>
+           
+            <tr>
+              <td colSpan="2">
+                <div className="comment br animate w80"></div>
+                <div className="comment br animate w80"></div>
+                <hr/>
+                <div className="comment br animate w80"></div>
+                <div className="comment br animate w80"></div>
+              </td>              
+            </tr>
+             
         )
       }
       else {
@@ -89,7 +95,7 @@ class tablaDatos extends Component {
     }
   }
 
-  render() { 
+  render() {
 
     return (
       <div>
