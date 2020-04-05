@@ -33,7 +33,7 @@ class genericsFunctions extends Component {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "data": '{"fechas": "2020-02-29"}',
+            "data": '{"Fecha": "2020-02-29"}',
             "method": "GET",
             "headers": {
                 "content-type": "application/json",
@@ -44,7 +44,7 @@ class genericsFunctions extends Component {
 
         fecha = (fecha) ? this.formatDate(fecha) : this.formatDate(new Date());
               
-        let params = `q={"Fechas":{"$eq":{"$date":"${fecha}"}}}`;
+        let params = `q={"Fecha":{"$eq":{"$date":"${fecha}"}}}`;
         let urlBase = 'https://covid19spain-ad3b.restdb.io/rest/coronavirus-spain?';
         let url = urlBase + params;
 
@@ -56,7 +56,7 @@ class genericsFunctions extends Component {
                     return {
                         "CCAA": item.CCAA,
                         "region": lista.find((it => it["CCAA"] === item["CCAA"]))["Descripcion"],
-                        "Fechas": item.Fechas,
+                        "Fecha": item.Fecha,
                         "numero_casos": item.Casos,
                         "Fallecidos": item.Fallecidos,
                         "Recuperados": item.Recuperados

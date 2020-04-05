@@ -70,17 +70,17 @@ class tablaDatos extends Component {
 
       if (this.state.isLoading) {
         return (
-           
-            <tr>
-              <td colSpan="2">
-                <div className="comment br animate w80"></div>
-                <div className="comment br animate w80"></div>
-                <hr/>
-                <div className="comment br animate w80"></div>
-                <div className="comment br animate w80"></div>
-              </td>              
-            </tr>
-             
+
+          <tr>
+            <td colSpan="2">
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+              <hr />
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+            </td>
+          </tr>
+
         )
       }
       else {
@@ -129,14 +129,15 @@ class tablaDatos extends Component {
             </tr>
           </thead>
           <tbody>
+
             {
               this.renderTableData()
             }
-
             <tr>
-              <td>Total</td>
-              <td>{this.totalCasos}</td>
+              <td><h5>Total</h5></td>
+              <td><h5>{this.totalCasos}</h5></td>
             </tr>
+
           </tbody>
         </table>
 
