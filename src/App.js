@@ -7,6 +7,8 @@ import TablaDatos from './components/tabla'
  
 import LineGraph from './components/chartData'
 import { datos } from './data/data.json'
+import genericsFunctions from './Services/retrieveData';
+
 
 class App extends Component {
 
@@ -14,6 +16,11 @@ constructor() {
   super();
   this.state  = { datos }
 
+}
+
+componentDidMount() {
+  // let InitFunctions = new genericsFunctions();
+  //  InitFunctions.getAllData();
 }
 
 render() {

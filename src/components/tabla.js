@@ -37,6 +37,7 @@ class tablaDatos extends Component {
 
     let test = new genericsFunctions();
     const result = test.getAll(_fecha);
+    test.getAllData();
 
     this.setState({ isLoading: true })
     this.totalCasos = 0;
@@ -51,9 +52,7 @@ class tablaDatos extends Component {
 
   renderTableData() {
 
-
-
-    if (this.state.data.length > 0) {
+    if (this.state.data && this.state.data.length > 0) {
       return (this.state.data || []).map((x, index) => {
         let indexRow = "row" + index;
         this.totalCasos += parseInt(x.numero_casos);
@@ -72,14 +71,17 @@ class tablaDatos extends Component {
         return (
 
           <tr>
-            <td colSpan="2">
-              <div className="comment br animate w80"></div>
-              <div className="comment br animate w80"></div>
-              <hr />
-              <div className="comment br animate w80"></div>
-              <div className="comment br animate w80"></div>
-            </td>
-          </tr>
+          <td colSpan="2">
+            <div className="comment br animate w80"></div>
+            <div className="comment br animate w80"></div>
+            <hr />
+            <div className="comment br animate w80"></div>
+            <div className="comment br animate w80"></div>
+            <hr />
+            <div className="comment br animate w80"></div>
+            <div className="comment br animate w80"></div>
+          </td>
+        </tr>
 
         )
       }

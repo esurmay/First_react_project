@@ -1,13 +1,18 @@
 
 import { Component } from 'react';
 import axios from "axios";
-import { datos } from '../data/region_master.json'
+import { regiones } from '../data/region_master.json'
+import _ from 'lodash';
 
 class genericsFunctions extends Component {
 
     constructor() {
         super()
-        this.state = { datos }
+        this.state = { data: [] }
+    }
+
+    componentDidMount() {
+        this.getAllData()
     }
 
     formatDate(date) {
@@ -15,20 +20,16 @@ class genericsFunctions extends Component {
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();
-
-  
-
-
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
         return [year, month, day].join('-');
     }
 
-    getAll = async (fecha) => {
+    getAllData = async (fecha) => {
 
-        let data = [];
-       
+        let dataResult = [];
+
 
         var settings = {
             "async": true,
@@ -42,18 +43,17 @@ class genericsFunctions extends Component {
             }
         }
 
-        fecha = (fecha) ? this.formatDate(fecha) : this.formatDate(new Date());
-              
-        let params = `q={"Fecha":{"$eq":{"$date":"${fecha}"}}}`;
-        let urlBase = 'https://covid19spain-ad3b.restdb.io/rest/coronavirus-spain?';
-        let url = urlBase + params;
+
+        let urlBase = 'https://covid19spain-ad3b.restdb.io/rest/coronavirus-spain';
+        let url = urlBase;
 
         await axios.get(url, settings)
             .then(response => {
 
-                let lista = datos;
-                data =  response.data.map((item) => {
-                    return {
+                let lista = regiones;
+                dataResult = response.data.map((item) => {
+
+                    let tabla = {
                         "CCAA": item.CCAA,
                         "region": lista.find((it => it["CCAA"] === item["CCAA"]))["Descripcion"],
                         "Fecha": item.Fecha,
@@ -61,17 +61,33 @@ class genericsFunctions extends Component {
                         "Fallecidos": item.Fallecidos,
                         "Recuperados": item.Recuperados
                     }
+                    return tabla;
                 });
+
+                localStorage.setItem('data', JSON.stringify(dataResult));
+                // let datalocal = localStorage.getItem('data');
+                // console.log('retrievedObject: ', JSON.parse(datalocal))
+              
+
             }, error => {
                 console.log(error);
             });
 
-            
-
-        return data
+        return dataResult;
     }
 
-   
+    getAll = async (fecha) => {
+
+
+        let datalocal = JSON.parse(localStorage.getItem('data'));
+        let dataFiltered = datalocal.filter((x) => {
+            return new Date(x.Fecha).toLocaleDateString() === new Date(fecha).toLocaleDateString()
+        })
+        
+        return dataFiltered;
+
+    }
+
 
 }
 export default genericsFunctions;
