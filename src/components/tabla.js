@@ -8,7 +8,7 @@ class tablaDatos extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: [], fecha: new Date(), isLoading: false };
+    this.state = { data: [], fecha: new Date(), isLoading: false, total: 0 };
     this.labelFecha = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.totalCasos = 0;
@@ -16,37 +16,22 @@ class tablaDatos extends Component {
   }
 
 
-
-  handleClick(e, countDay) {
-    e.preventDefault();
-    var fechaActual = this.state.fecha;
-    fechaActual.setDate(fechaActual.getDate() + countDay);
-
-    this.setState(state => ({
-      data: this.reloadGrid(fechaActual),
-      fecha: new Date(fechaActual),
-      totalCasos: 0,
-    }));
-  }
-
   componentDidMount() {
-    this.reloadGrid(new Date());
+    this.loadData(new Date());
+
   }
+ 
+  loadData(_fecha) {
 
-  reloadGrid(_fecha) {
-
-    let test = new genericsFunctions();
-    const result = test.getAll(_fecha);
-    test.getAllData();
-
+     
     this.setState({ isLoading: true })
-    this.totalCasos = 0;
-    result.then(data =>
-      this.setState({ data: data, isLoading: false })
-
-    )
-
-    return result;
+    let functions = new genericsFunctions();
+    functions.getAllData();
+    const datos = functions.getAll(_fecha);
+     
+    this.setState({ data: datos, isLoading: false })
+ 
+ 
   }
 
 
@@ -55,7 +40,7 @@ class tablaDatos extends Component {
     if (this.state.data && this.state.data.length > 0) {
       return (this.state.data || []).map((x, index) => {
         let indexRow = "row" + index;
-        this.totalCasos += parseInt(x.numero_casos);
+        //this.totalCasos += parseInt(x.numero_casos);
 
         return (
           <tr className={indexRow} key={index.toString()} >
@@ -71,17 +56,17 @@ class tablaDatos extends Component {
         return (
 
           <tr>
-          <td colSpan="2">
-            <div className="comment br animate w80"></div>
-            <div className="comment br animate w80"></div>
-            <hr />
-            <div className="comment br animate w80"></div>
-            <div className="comment br animate w80"></div>
-            <hr />
-            <div className="comment br animate w80"></div>
-            <div className="comment br animate w80"></div>
-          </td>
-        </tr>
+            <td colSpan="2">
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+              <hr />
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+              <hr />
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+            </td>
+          </tr>
 
         )
       }
@@ -95,6 +80,27 @@ class tablaDatos extends Component {
         )
       }
     }
+  }
+
+  handleClick(e, countDay) {
+    e.preventDefault();
+    var fechaActual = this.state.fecha;
+    fechaActual.setDate(fechaActual.getDate() + countDay);
+
+    let test = new genericsFunctions();
+    const datos = test.getAll(fechaActual);
+
+    this.totalCasos = 0;
+    
+    this.totalCasos = (datos.length > 0) ? 
+    datos.reduce((acc, current) => { return Number(acc) + Number(current.numero_casos); },0):
+    0;
+    this.setState(state => ({
+      data: datos,
+      fecha: new Date(fechaActual),
+      total: this.totalCasos,
+      //totalCasos: 0,
+    }));
   }
 
   render() {
@@ -131,7 +137,10 @@ class tablaDatos extends Component {
             </tr>
           </thead>
           <tbody>
-
+            <tr>
+              <td><h5>Total</h5></td>
+              <td><h5>{this.state.total}</h5></td>
+            </tr>
             {
               this.renderTableData()
             }

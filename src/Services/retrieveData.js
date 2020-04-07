@@ -76,7 +76,7 @@ class genericsFunctions extends Component {
         return dataResult;
     }
 
-    getAll = async (fecha) => {
+    getAll = (fecha) => {
 
 
         let datalocal = JSON.parse(localStorage.getItem('data'));
