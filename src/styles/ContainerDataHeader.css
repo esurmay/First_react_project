@@ -1,0 +1,70 @@
+
+.card{
+    margin: 10px;
+    border-radius: 10px !important;
+}
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+    border-radius: 10px !important;
+}
+
+ 
+
+.card-bodyTotales{
+    border-radius: 10px !important;
+    background-image: linear-gradient(to bottom right, orange, yellow);
+    font-size: medium;
+    color: black;
+
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-bodyActivos{
+    border-radius: 10px !important;
+    background-image: linear-gradient(to bottom right, red, orange);
+    font-size: medium;
+    color: black;
+
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-bodyRecuperados{
+    border-radius: 10px !important;
+    background-image: linear-gradient(to bottom right, green, yellow);
+    font-size: medium;
+    color: black;
+
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-body{
+    border-radius: 10px !important;
+    background-image: linear-gradient(to bottom right, black, grey);
+    font-size: medium;
+    color: white;
+
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+
+
+.card-title{ color: white;}
+
+/*
+ col-        (extra small devices - screen width less than 576px)
+.col-sm- (small devices - screen width equal to or greater than 576px)
+.col-md- (medium devices - screen width equal to or greater than 768px)
+.col-lg- (large devices - screen width equal to or greater than 992px)
+.col-xl- (
+
+*/
+

@@ -12,7 +12,7 @@ export default class LineGraph extends Component {
     this.createChart();
   }
 
-  chartOptions(){
+  chartOptions() {
     let options = {
       responsive: true,
       title: {
@@ -40,7 +40,7 @@ export default class LineGraph extends Component {
     return options;
   }
 
-  loadData(){
+  loadData() {
 
     var chartColors = {
       red: 'rgb(255, 99, 132)',
@@ -53,25 +53,32 @@ export default class LineGraph extends Component {
     };
 
     let functions = new genericsFunctions();
-   
+
     const datos = functions.getDataForfBars();
-    // console.log("datos:");
-    // console.log(datos);
 
-    let fechas = datos.map((item) => item.Fecha);
-    let casos = datos.map((item) => item.Total);
-    // console.log("casos");
-    // console.log(casos);
+    let fechas = datos.map((item) => { return new Date(item.Fecha).toLocaleDateString() });
+
+    let activos = datos.map((item) => item.numero_casos - item.Recuperados - item.Fallecidos);
+    let casos = datos.map((item) => item.numero_casos);
+    let fallecidos = datos.map((item) => item.Fallecidos);
+    let recuperados = datos.map((item) => item.Recuperados);
+
     let Months = [...fechas];
-    //let Months = ["Diciembre 2019", "Enero 2020", "Febrero 2020", "Marzo 2020", "Abril 2020"];
 
-   let data = {
+    let data = {
       type: "line",
       data: {
-        //Bring in data
+
         labels: Months,
         datasets: [{
-          label: "Casos",
+          label: "Activos",
+          backgroundColor: chartColors.yellow,
+          borderColor: "yellow",
+          data: [...activos],
+          fill: false,
+        },
+        {
+          label: "Totales",
           backgroundColor: chartColors.red,
           borderColor: "red",
           data: [...casos],
@@ -81,17 +88,13 @@ export default class LineGraph extends Component {
           fill: false,
           backgroundColor: "black",
           borderColor: "gray",
-          data: [
-            1000, 10000, 20000, 30000, 40000, 50000, 70000
-          ],
+          data: [...fallecidos],
         }, {
           label: "recuperados",
           fill: false,
           backgroundColor: chartColors.green,
           borderColor: "green",
-          data: [
-            1000, 2500, 3000, 3400, 4000, 4500, 15000
-          ],
+          data: [...recuperados],
         }]
       },
       options: this.chartOptions(),

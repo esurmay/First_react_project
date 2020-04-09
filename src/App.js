@@ -9,6 +9,7 @@ import LineGraph from './components/chartData'
 import { datos } from './data/data.json'
 import genericsFunctions from './Services/retrieveData';
 
+import Container from './components/container'
 
 class App extends Component {
 
@@ -32,9 +33,7 @@ render() {
            
           <div className="container">
             <div className="row">
-              <div className="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-              
-              </div>
+                  <Container></Container>
              
             </div>
 
