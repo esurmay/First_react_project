@@ -65,9 +65,7 @@ class genericsFunctions extends Component {
                 });
 
                 localStorage.setItem('data', JSON.stringify(dataResult));
-                // let datalocal = localStorage.getItem('data');
-                // console.log('retrievedObject: ', JSON.parse(datalocal))
-              
+
 
             }, error => {
                 console.log(error);
@@ -83,11 +81,98 @@ class genericsFunctions extends Component {
         let dataFiltered = datalocal.filter((x) => {
             return new Date(x.Fecha).toLocaleDateString() === new Date(fecha).toLocaleDateString()
         })
-        
+
         return dataFiltered;
 
     }
 
+    getDataForfBars = (fecha) => {
+
+
+        let datalocal = JSON.parse(localStorage.getItem('data'));
+
+        let arr = [
+            { "Fecha": '1/12/2017', "Casos": "1", "Recuperados": 1, "Fallecidos": "2" }, 
+            { "Fecha": '1/12/2017', "Casos": "2", "Recuperados": 3, "Fallecidos": "2" }, 
+            { "Fecha": '1/12/2017', "Casos": "3", "Recuperados": 7, "Fallecidos": "3" }, 
+            { "Fecha": '1/13/2018', "Casos": "4", "Recuperados": 1, "Fallecidos": "4" }, 
+            { "Fecha": '1/16/2018', "Casos": "5", "Recuperados": 3, "Fallecidos": "5" }, 
+            { "Fecha": '1/16/2018', "Casos": "6", "Recuperados": 4, "Fallecidos": "7" }];
+      
+        let d = datalocal.map((x) => {
+
+            return {
+                Fallecidos: parseInt(x.Fallecidos),
+                Recuperados: parseInt(x.Recuperados), 
+                Fecha: x.Fecha, 
+                Casos: parseInt(x.numero_casos)
+            }
+        });
+        console.log("d"); 
+        console.log(d);
+        let dataresult = Object.values(d.reduce((a, { Fallecidos, Casos, Recuperados, Fecha }) => {
+            if (!a[Fecha])
+                a[Fecha] = Object.assign({}, { Fallecidos, Recuperados, Fecha, Casos });
+            else
+               { 
+                   
+                   a[Fecha].Casos += Number(Casos);
+                   a[Fecha].Recuperados += Number(Recuperados);
+                   a[Fecha].Fallecidos += Number(Fallecidos);
+                }
+            return a;
+        }, {}, 0));
+    
+        console.log("casos");
+        console.log(dataresult);
+
+        // var result2 = datalocal.reduce(function (acc, obj) {
+        //     var key = obj.Fecha;
+        //     var keyFallecidos = obj.Fallecidos;
+        //     var keyRecuperados = obj.Recuperados;
+
+        //     const previousFecha = acc[key];
+        //     let casos = Number(obj["numero_casos"]);
+        //     let Fallecidos = Number(obj["Fallecidos"]);
+        //     let Recuperados = Number(obj["Fallecidos"]);
+        //     if (previousFecha) {
+        //         casos += Number(previousFecha);
+        //     }
+
+        //     return Object.assign(acc, {
+        //         [key]: casos,
+        //         [keyFallecidos]: Fallecidos,
+        //         [keyRecuperados]: Recuperados,
+        //     })
+
+        // }, {});
+
+
+        var result = datalocal.reduce(function (acc, obj) {
+            var key = obj.Fecha;
+
+            const previousPrice = acc[key];
+            let currentPrice = Number(obj["numero_casos"]);
+            if (previousPrice) {
+                currentPrice += Number(previousPrice);
+            }
+
+            return Object.assign(acc, {
+                [key]: currentPrice,
+            })
+
+        }, {});
+
+        const entries = Object.entries(result);
+
+        let totales = [];
+        for (const [fecha, count] of entries) {
+            totales.push({ "Fecha": new Date(fecha).toLocaleDateString(), "Total": count });
+
+        }
+        return totales;
+
+    }
 
 }
 export default genericsFunctions;
