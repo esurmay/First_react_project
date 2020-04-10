@@ -3,37 +3,61 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import Navigation from './components/Navigation';
+import Navbar from 'react-bootstrap/Navbar'
+
 import TablaDatos from './components/tabla'
  
 import LineGraph from './components/chartData'
 import { datos } from './data/data.json'
 import genericsFunctions from './Services/retrieveData';
 
-import Container from './components/container'
+import CardDataHeader from './components/CardDataHeader'
+import Container from 'react-bootstrap/Container'
+
 
 class App extends Component {
 
 constructor() {
   super();
-  this.state  = { datos }
+ 
+  this.state  = { datos, rangoFechas: {} }
 
 }
 
 componentDidMount() {
-  // let InitFunctions = new genericsFunctions();
-  //  InitFunctions.getAllData();
+  this.loadData();
 }
+
+loadData(){
+
+  let functions = new genericsFunctions();
+  let datos = functions.getDateRangeHeader();
+  this.setState({ rangoFechas: datos });
+
+}
+
+
 
 render() {
    
     return (
       <div className="App">
         
-          <Navigation titulo="Pagina Principal" casos={this.state.datos} /> 
-           
+          {/* <Navigation titulo="Pagina Principal" casos={this.state.datos} />  */}
+          <Container>
+          <Navbar bg="primary"  fixed="top" expand="lg" variant="dark">
+            <Navbar.Brand href="#home">Covid19 España</Navbar.Brand>
+          </Navbar>
+
+          </Container>
           <div className="container">
-            <div className="row">
-                  <Container></Container>
+          <div className="row">
+                  <br></br>
+                  <br></br>
+             
+            </div>
+          <div className="row">
+                  <CardDataHeader></CardDataHeader>
              
             </div>
 
@@ -44,7 +68,8 @@ render() {
               </div>
               <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8">
                 <h1>Historico</h1>
-              <h2>Diciembre 2019 - Marzo 2020</h2>
+              <h2>{ this.state.rangoFechas.FechaInicio} - {this.state.rangoFechas.FechaFin }             
+              </h2>
 
               <LineGraph></LineGraph>
               </div> 
@@ -55,6 +80,11 @@ render() {
                  
                 </div>
 
+
+          
+
+      
+           
           </div>
        
         </div>

@@ -1,6 +1,6 @@
 
 .card{
-    margin: 10px;
+    margin: 20px;
     border-radius: 10px !important;
 }
 .card-horizontal {
@@ -37,7 +37,7 @@
     border-radius: 10px !important;
     background-image: linear-gradient(to bottom right, green, yellow);
     font-size: medium;
-    color: black;
+    color: white;
 
     flex: 1 1 auto;
     min-height: 1px;
@@ -46,18 +46,26 @@
 
 .card-body{
     border-radius: 10px !important;
-    background-image: linear-gradient(to bottom right, black, grey);
+    background-image: linear-gradient(to bottom right, #008EED, #008EED);
     font-size: medium;
     color: white;
 
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
+
+    box-shadow: 10px 10px 10px 0px #6BC4FF;
 }
 
 
 
 .card-title{ color: white;}
+
+hr.new1 {
+    border: 0.2px solid #6BC4FF;
+    width: 100%;
+  }
+  
 
 /*
  col-        (extra small devices - screen width less than 576px)

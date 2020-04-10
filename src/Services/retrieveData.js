@@ -16,6 +16,7 @@ class genericsFunctions extends Component {
     }
 
     formatDate(date) {
+
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
@@ -23,7 +24,16 @@ class genericsFunctions extends Component {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
-        return [year, month, day].join('-');
+        return [month, year].join('/');
+
+        // var d = new Date(date),
+        //     month = '' + (d.getMonth() + 1),
+        //     day = '' + d.getDate(),
+        //     year = d.getFullYear();
+        // if (month.length < 2) month = '0' + month;
+        // if (day.length < 2) day = '0' + day;
+
+        // return [year, month, day].join('-');
     }
 
     getAllData = async (fecha) => {
@@ -51,18 +61,18 @@ class genericsFunctions extends Component {
             .then(response => {
 
                 let lista = regiones;
-                
+
                 let dataResponse = response.data;
                 dataResult = dataResponse.map((item) => {
 
-                   
+
                     let tabla = {
                         "CCAA": item.CCAA,
                         "region": lista.find((it => it["CCAA"] === item["CCAA"]))["Descripcion"],
                         "Fecha": item.FECHA,
                         "numero_casos": parseInt(item.CASOS),
-                        "Fallecidos":   parseInt(item.Fallecidos),
-                        "Recuperados":  parseInt(item.Recuperados)
+                        "Fallecidos": parseInt(item.Fallecidos),
+                        "Recuperados": parseInt(item.Recuperados)
                     }
                     return tabla;
                 });
@@ -81,9 +91,8 @@ class genericsFunctions extends Component {
 
 
         let datalocal = JSON.parse(localStorage.getItem('data'));
-       
-        if(datalocal == null)
-        {
+
+        if (datalocal == null) {
             return { Fecha: 0, numero_casos: 0, Recuperados: 0, Fallecidos: 0 }
         }
 
@@ -100,32 +109,76 @@ class genericsFunctions extends Component {
 
         let datalocal = JSON.parse(localStorage.getItem('data'));
 
-        if(datalocal == null)
-        {
+        if (datalocal == null) {
             return { Fecha: 0, numero_casos: 0, Recuperados: 0, Fallecidos: 0 }
         }
 
         let dataresult = Object.values(datalocal.reduce((a, { Fecha, numero_casos, Recuperados, Fallecidos }) => {
             if (!a[Fecha])
-                a[Fecha] = Object.assign({}, { Fecha, numero_casos, Recuperados, Fallecidos  });
-            else
-               { 
-                   
-                   a[Fecha].numero_casos += Number(numero_casos);
-                   a[Fecha].Recuperados += Number(Recuperados);
-                   a[Fecha].Fallecidos += Number(Fallecidos);
+                a[Fecha] = Object.assign({}, { Fecha, numero_casos, Recuperados, Fallecidos });
+            else {
 
-                }
+                a[Fecha].numero_casos += Number(numero_casos);
+                a[Fecha].Recuperados += Number(Recuperados);
+                a[Fecha].Fallecidos += Number(Fallecidos);
+
+            }
             return a;
         }, {}, 0));
-    
-        console.log("casos");
-        console.log(dataresult);
-
 
         return dataresult;
 
     }
+
+    getDataForHeaders = () => {
+
+        const datos = this.getDataForfBars();
+
+        let casos = 0;
+        let activos = 0;
+        let fallecidos = 0;
+        let recuperados = 0;
+
+        if (datos && datos.length > 0) {
+
+            let last = datos[datos.length - 1];
+            casos = last.numero_casos;
+            activos = last.numero_casos - last.Recuperados - last.Fallecidos;
+            fallecidos = last.Fallecidos;
+            recuperados = last.Recuperados;
+        }
+
+        return [
+            { total: this.numberWithCommas(casos), Descripcion: "Total Casos" },
+            { total: this.numberWithCommas(activos), Descripcion: "Casos Activos" },
+            { total: this.numberWithCommas(fallecidos), Descripcion: "Fallecidos" },
+            { total: this.numberWithCommas(recuperados), Descripcion: "Recuperados" }
+        ]
+    }
+
+    getDateRangeHeader = () => {
+
+        const datos = this.getDataForfBars();
+
+        let fechaInicio = new Date();
+        let fechaFin = new Date();
+ 
+        if (datos && datos.length > 0) {
+            fechaInicio = datos[0].Fecha;
+            fechaFin = datos[datos.length - 1].Fecha;
+        }
+
+        return {             
+            FechaInicio:  this.formatDate(fechaInicio),
+            FechaFin: this.formatDate(fechaFin),
+        }
+
+    }
+
+    numberWithCommas(x) {
+        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+
 
 }
 export default genericsFunctions;

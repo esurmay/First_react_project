@@ -57,7 +57,7 @@ export default class LineGraph extends Component {
     const datos = functions.getDataForfBars();
 
     let fechas = datos.map((item) => { return new Date(item.Fecha).toLocaleDateString() });
-
+  
     let activos = datos.map((item) => item.numero_casos - item.Recuperados - item.Fallecidos);
     let casos = datos.map((item) => item.numero_casos);
     let fallecidos = datos.map((item) => item.Fallecidos);

@@ -151,6 +151,7 @@ class tablaDatos extends Component {
 
           </tbody>
         </table>
+        <hr className="new1"></hr>
 
 
       </div>
