@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/navbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
+
+import {  Link } from 'react-router-dom';
+
 
 
 class AvisoCookies extends Component {
@@ -20,7 +22,11 @@ class AvisoCookies extends Component {
             preferencias AQUÍ. 
             
             </p>
-            <button>Aceptar Cookies</button> | <button>Rechazar Cookies</button>
+            <Link to="/cookies">
+                <button renderAs="button">
+                    <span>Aceptar Cookies</span>
+                </button>
+                </Link> | <button>Rechazar Cookies</button>
         </footer>
     );
 

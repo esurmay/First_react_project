@@ -43,6 +43,7 @@ class CustomContainer extends Component {
                                     <p className="card-text text-right">
 
                                         {x.total}
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 
                                     </p>
                                 </div>
