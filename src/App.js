@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navigation from './components/Navigation';
 import Navbar from 'react-bootstrap/Navbar'
+import AvisoCookies from './components/AvisoCookies';
 
 import TablaDatos from './components/tabla'
  
@@ -11,9 +12,8 @@ import LineGraph from './components/chartData'
 import { datos } from './data/data.json'
 import genericsFunctions from './Services/retrieveData';
 
-import CardDataHeader from './components/CardDataHeader'
-import Container from 'react-bootstrap/Container'
-
+import CardDataHeader from './components/CardDataHeader';
+import Container from 'react-bootstrap/Container';
 
 class App extends Component {
 
@@ -87,7 +87,8 @@ render() {
            
           </div>
        
-        </div>
+        <AvisoCookies></AvisoCookies>
+      </div>
            
       
     );
