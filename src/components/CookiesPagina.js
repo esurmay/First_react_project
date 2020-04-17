@@ -78,35 +78,12 @@ class CustomContainer extends Component {
         
         <p class="text-justify">Si tiene cualquier duda acerca de nuestra política de cookies, puede contactar con esta página web a través de nuestros canales de Contacto.
               </p>    
+              <p class="text-justify"> <strong>NOTA</strong>: esta lista se actualizará con la mayor celeridad posible a medida que vayan cambiando los servicios ofrecidos en los sitios webs y las cookies utilizadas a tales efectos. Sin embargo, ocasionalmente, durante esta actualización puede ser que la lista no incluya ya una cookie, aunque siempre se referirá a cookies con propósitos idénticos a los registrados en esta lista.</p>
+
               </div>
          </div>
          
-         
-        <div class="row">
-            <div class="col-sm-12">
-              <h3>POLITICAS DE PRIVACIDAD</h3>
-                <p class="text-justify"> Esta pagina web ha sido creada con fin practico de tecnologia web (reactJS). De caracter informativo, meramente practico y de contenido no lucrativo.
-              </p>    
-              
-              <p class="text-justify"> la fuente de informacion de esta pagina web es de la pagina oficial: 
-              <a href="https://covid19.isciii.es/">https://covid19.isciii.es/</a>
-              </p>   
-              
-              <p class="text-justify"> IMPORTANTE:</p>
-              <span>El calculo de los casos activos lo hacemos restando el total de casos, los recuperados y los fallecidos:</span>
-             
-               <ul>
-              <li>Ta = Total Activos</li>
-              <li>Tc = Total Contagios</li>
-              <li>Tr = Total Recuperados</li>
-              <li>Tf = Total Fallecidos</li>
-              <li><strong>FORMULA: Ta = Tc - Tr - Tf</strong></li>
-            </ul>
-               
-               <p class="text-justify"> <strong>NOTA</strong>: esta lista se actualizará con la mayor celeridad posible a medida que vayan cambiando los servicios ofrecidos en los sitios webs y las cookies utilizadas a tales efectos. Sin embargo, ocasionalmente, durante esta actualización puede ser que la lista no incluya ya una cookie, aunque siempre se referirá a cookies con propósitos idénticos a los registrados en esta lista.</p>
-              </div>
-         </div>
-          
+        
         </div>
         
         </div>

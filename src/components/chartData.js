@@ -2,45 +2,29 @@ import React, { Component } from 'react'
 import Chart from "chart.js";
 import classes from '../styles/LineGraph.module.css';
 import genericsFunctions from '../Services/retrieveData';
-
+import { Line } from 'react-chartjs-2';
 
 export default class LineGraph extends Component {
   chartRef = React.createRef();
 
+  constructor(props) {
+    super(props);
+    this.state = { data: [], isLoading: true };
+  }
 
   componentDidMount() {
     this.createChart();
   }
 
-  chartOptions() {
-    let options = {
-      responsive: true,
-      title: {
-        display: false,
-        text: 'historico'
-      },
-      tooltips: {
-        mode: 'label',
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
-      },
-      scales: {
-        xAxes: [{
-          display: true,
+  async createChart() {
 
-        }],
-        yAxes: [{
-          display: true,
+    this.setState({ isLoading: true })
+    let result = await this.loadData();
+    this.setState({ data: result, isLoading: false })
 
-        }]
-      }
-    };
-    return options;
   }
 
-  loadData() {
+  async loadData() {
 
     var chartColors = {
       red: 'rgb(255, 99, 132)',
@@ -53,16 +37,13 @@ export default class LineGraph extends Component {
     };
 
     let functions = new genericsFunctions();
+    const datos = await functions.getDataForfBars();
 
-    const datos = functions.getDataForfBars();
-
-    let fechas = datos.map((item) => { return new Date(item.Fecha).toLocaleDateString() });
-  
-    let activos = datos.map((item) => item.numero_casos - item.Recuperados - item.Fallecidos);
-    let casos = datos.map((item) => item.numero_casos);
+    let fechas = datos.map((item) => item.Fecha);
+    let activos = datos.map((item) => item.Casos - item.Recuperados - item.Fallecidos);
+    let casos = datos.map((item) => item.Casos);
     let fallecidos = datos.map((item) => item.Fallecidos);
     let recuperados = datos.map((item) => item.Recuperados);
-
     let Months = [...fechas];
 
     let data = {
@@ -100,25 +81,63 @@ export default class LineGraph extends Component {
       options: this.chartOptions(),
     }
 
-
     return data;
+
   }
 
-  createChart() {
+  chartOptions() {
+    let options = {
+      responsive: true,
+      title: {
+        display: false,
+        text: 'historico'
+      },
+      tooltips: {
+        mode: 'label',
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+      scales: {
+        xAxes: [{
+          display: true,
 
-    const myChartRef = this.chartRef.current.getContext("2d");
-    new Chart(myChartRef, this.loadData());
+        }],
+        yAxes: [{
+          display: true,
 
+        }]
+      }
+    };
+    return options;
   }
 
   render() {
-    return (
-      <div className={classes.graphContainer}>
-        <canvas
-          id="myChart"
-          ref={this.chartRef}
-        />
-      </div>
-    )
+
+    if (this.state.isLoading) {
+      return (
+        <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <div className={classes.graphContainer}>
+            <div >
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+            </div>
+            <div >
+              <div className="comment br animate w80"></div>
+              <div className="comment br animate w80"></div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className={classes.graphContainer}>
+          <Line data={this.state.data.data} options={this.state.data.options}></Line>
+        </div>
+      )
+    }
+
   }
 }

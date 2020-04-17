@@ -3,15 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/navbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
-
-import {  Link } from 'react-router-dom';
+import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 
 
 
 class AvisoCookies extends Component {
+ 
+    
+      closeOverLay = (e) => {
+        alert("fse");
+      }
 
     Footer = () => (
         <footer className="footer">
+            
             <p className="text-white">Utilizamos cookies propias y de terceros
             para analizar nuestros servicios y
             mostrarte publicidad relacionada con tus
@@ -19,14 +24,14 @@ class AvisoCookies extends Component {
             a partir de tus hábitos de navegación
             (por ejemplo, páginas visitadas). Puedes
             obtener más información y configurar tus
-            preferencias AQUÍ. 
+            preferencias. <Link to="/Cookies" style={{color: 'white'}}>AQUÍ</Link>
             
-            </p>
-            <Link to="/cookies">
-                <button renderAs="button">
+            </p>  
+             
+                <button onClick={this.props.hideOverlay}>
                     <span>Aceptar Cookies</span>
                 </button>
-                </Link> | <button>Rechazar Cookies</button>
+                 | <button>Rechazar Cookies</button>
         </footer>
     );
 

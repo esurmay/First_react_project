@@ -8,7 +8,7 @@ class tablaDatos extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: [], fecha: new Date(), isLoading: false, total: 0 };
+    this.state = { data: [], fecha: new Date(), isLoading: false, total: 0, disabledClass: "arrow" };
     this.labelFecha = React.createRef();
     this.handleClick = this.handleClick.bind(this);
     this.totalCasos = 0;
@@ -84,23 +84,42 @@ class tablaDatos extends Component {
 
   handleClick(e, countDay) {
     e.preventDefault();
+    e.stopPropagation();
     var fechaActual = this.state.fecha;
     fechaActual.setDate(fechaActual.getDate() + countDay);
 
-    let test = new genericsFunctions();
-    const datos = test.getAll(fechaActual);
+    this.setState({ data: [],isLoading: true, disabledClass: "arrow arrowDisabled" });
 
-    this.totalCasos = 0;
+    let test = new genericsFunctions();
+    const datos = test.getAllOriginal(fechaActual);
+    //const datos = test.getAll(fechaActual);
+
+    datos.then(data => {
+        console.log(data);
+        
+        this.totalCasos = (data.length > 0) ? 
+        data.reduce((acc, current) => { return Number(acc) + Number(current.numero_casos); },0):
+        0;
+
+        this.setState({ data: data, isLoading: false, total: this.totalCasos, disabledClass: "arrow"  });
+        
+       
+    });
+
+
+    // this.totalCasos = 0;
     
-    this.totalCasos = (datos.length > 0) ? 
-    datos.reduce((acc, current) => { return Number(acc) + Number(current.numero_casos); },0):
-    0;
-    this.setState(state => ({
-      data: datos,
-      fecha: new Date(fechaActual),
-      total: this.totalCasos,
-      //totalCasos: 0,
-    }));
+    // this.totalCasos = (datos.length > 0) ? 
+    // datos.reduce((acc, current) => { return Number(acc) + Number(current.numero_casos); },0):
+    // 0;
+    // this.setState(state => ({
+    //   data: datos,
+    //   fecha: new Date(fechaActual),
+    //   total: this.totalCasos,
+    //   //totalCasos: 0,
+    // }));
+
+    
   }
 
   render() {
@@ -111,7 +130,7 @@ class tablaDatos extends Component {
         <div>
           <div className="container" id="header">
             <div className="header-left">
-              <span className="arrow" onClick={(e) => this.handleClick(e, -1)}>
+              <span className={this.state.disabledClass} onClick={(e) => this.handleClick(e, -1)} >
                 <i className="fas fa-arrow-circle-left"></i>
               </span>
             </div>
@@ -123,7 +142,7 @@ class tablaDatos extends Component {
               </p>
             </div>
             <div className="logo" align="right">
-              <span className="arrow" onClick={(e) => this.handleClick(e, 1)}>
+              <span className={this.state.disabledClass} onClick={(e) => this.handleClick(e, 1)}>
                 <i className="fas fa-arrow-circle-right"></i>
               </span>
             </div>
@@ -137,10 +156,10 @@ class tablaDatos extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {/* <tr>
               <td><h5>Total</h5></td>
               <td><h5>{this.state.total}</h5></td>
-            </tr>
+            </tr> */}
             {
               this.renderTableData()
             }

@@ -50,6 +50,9 @@ tr:hover {
 .arrow:active {
   color: blue;
 }
+.arrowDisabled{
+  pointer-events: none;
+}
 
 #header{ width:100%}
 .header-left {
@@ -163,3 +166,8 @@ tr:hover {
  }
 }
 /* animation loading*/
+
+.divFooter{
+
+  font-size: 12px;
+}
