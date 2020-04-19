@@ -1,6 +1,6 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Nav, Navbar } from 'react-bootstrap'
-import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
  
