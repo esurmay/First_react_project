@@ -1,5 +1,6 @@
 {
-  "name": "myfirstapp",
+  "name": "covid19espana",
+  "homepage": "http://covid2020-001-site1.btempurl.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

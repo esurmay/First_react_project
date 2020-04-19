@@ -95,8 +95,7 @@ class tablaDatos extends Component {
     //const datos = test.getAll(fechaActual);
 
     datos.then(data => {
-        console.log(data);
-        
+    
         this.totalCasos = (data.length > 0) ? 
         data.reduce((acc, current) => { return Number(acc) + Number(current.numero_casos); },0):
         0;
