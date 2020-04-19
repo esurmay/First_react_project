@@ -92,8 +92,7 @@ class tablaDatos extends Component {
 
     let test = new genericsFunctions();
     const datos = test.getAllOriginal(fechaActual);
-    //const datos = test.getAll(fechaActual);
-
+   
     datos.then(data => {
     
         this.totalCasos = (data.length > 0) ? 
